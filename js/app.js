@@ -40,15 +40,12 @@ function showCards(index) {
   let shuffledCards = shuffle(dublicatedCards);
 
   for (let cards = 0; cards < index ; cards ++) {
-    let card = '<li class="card open show"> <i class="fa '+ shuffledCards[cards]+'"></i> </li>';
+    let card = '<li class="card"> <i class="fa '+ shuffledCards[cards]+'"></i> </li>';
     $(".deck").append(card); 
   }
 
 };
 showCards(16);
-// var a = [1,2,3,4];
-// var b = [5,6,7,8];
-// var x = a.concat(a);
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
