@@ -9,8 +9,11 @@
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+let moveCont = 0;
+const moveContWraper = $(".moves");
 
 // Shuffle function from http://stackoverflow.com/a/2450976
+
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -40,12 +43,34 @@ function showCards(index) {
   let shuffledCards = shuffle(dublicatedCards);
 
   for (let cards = 0; cards < index ; cards ++) {
-    let card = '<li class="card"> <i class="fa '+ shuffledCards[cards]+'"></i> </li>';
+    let card = '<li class="card open show"> <i class="fa '+ shuffledCards[cards]+'"></i> </li>';
     $(".deck").append(card); 
   }
-
 };
 showCards(16);
+
+// restarting the game
+function restart() {
+  $(".deck li").remove(); 
+  moveCont = 0;
+  move();
+  showCards(16);
+};
+
+function move(){
+  moveContWraper.text(moveCont);
+}
+
+
+$(".deck").on("click","li",function() {
+  moveCont += 1;
+  move();
+  // alert(moveCont);
+});
+
+$( ".restart" ).click(function() {
+  restart();
+});
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
