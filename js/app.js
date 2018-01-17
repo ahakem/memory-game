@@ -10,7 +10,9 @@
  *   - add each card's HTML to the page
  */
 let moveCont = 0;
+let matchCont = 0;
 const moveContWraper = $(".moves");
+let  tempArray = [];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 
@@ -28,6 +30,16 @@ function shuffle(array) {
     return array;
 }
 
+// comparing 2 arrays https://stackoverflow.com/questions/7837456/how-to-compare-arrays-in-javascript
+function arraysIdentical(a, b) {
+    var i = a.length;
+    if (i != b.length) return false;
+    while (i--) {
+        if (a[i] !== b[i]) return false;
+    }
+    return true;
+};
+
 // show suffled cards
 function showCards(index) {
   const cardIcons = [
@@ -43,7 +55,7 @@ function showCards(index) {
   let shuffledCards = shuffle(dublicatedCards);
 
   for (let cards = 0; cards < index ; cards ++) {
-    let card = '<li class="card open show"> <i class="fa '+ shuffledCards[cards]+'"></i> </li>';
+    let card = '<li class="card"> <i class="fa '+ shuffledCards[cards]+'"></i> </li>';
     $(".deck").append(card); 
   }
 };
@@ -59,18 +71,58 @@ function restart() {
 
 function move(){
   moveContWraper.text(moveCont);
+
 }
 
 
-$(".deck").on("click","li",function() {
-  moveCont += 1;
-  move();
-  // alert(moveCont);
-});
+// checkMatching();
+let  cards = document.querySelectorAll('.deck li');
 
-$( ".restart" ).click(function() {
-  restart();
-});
+function flipCard() {
+  for (let i = 0; i < cards.length; i++) {
+    cards[i].addEventListener('click', function() {
+      let clicked = $(this).children('i').attr("class").split(' ');
+      this.classList.add('open', 'show');
+      tempArray.push(clicked);
+      cardMatch();
+
+    });
+
+  }
+
+}
+// MAtching the Cards
+function cardMatch() {
+  if (tempArray.length == 2) {
+    if (arraysIdentical(tempArray[0], tempArray[1]) != true) {
+      setTimeout(function () {      
+         $( ".card.open.show" ).removeClass( "open show" );         
+      }, 800);
+      
+      tempArray = [];
+    }else{
+      matchCont += 1;
+      $(".card.open.show" ).addClass( "match" );
+      tempArray = [];
+    }
+  }
+}
+
+function play(){
+  $(".deck").on("click","li",function() {
+    moveCont += 1;
+    move();    
+  });
+
+  $( ".restart" ).click(function() {
+    restart();
+  });
+
+}
+flipCard();
+
+play();
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
