@@ -82,27 +82,25 @@ function flipCard() {
   for (let i = 0; i < cards.length; i++) {
     cards[i].addEventListener('click', function() {
       let clicked = $(this).children('i').attr("class").split(' ');
-      this.classList.add('open', 'show');
+      this.classList.add('open', 'show', 'animated', 'bounceIn');
       tempArray.push(clicked);
       cardMatch();
-
     });
-
   }
-
 }
+
 // MAtching the Cards
 function cardMatch() {
   if (tempArray.length == 2) {
     if (arraysIdentical(tempArray[0], tempArray[1]) != true) {
       setTimeout(function () {      
-         $( ".card.open.show" ).removeClass( "open show" );         
+         $( ".card.open.show" ).removeClass( "open show bounceIn" );         
       }, 800);
       
       tempArray = [];
     }else{
       matchCont += 1;
-      $(".card.open.show" ).addClass( "match" );
+      $(".card.open.show" ).addClass( "match flip" );
       tempArray = [];
     }
   }
