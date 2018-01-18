@@ -65,6 +65,7 @@ showCards(16);
 function restart() {
   $(".deck li").remove(); 
   moveCont = 0;
+  tempArray = []; //For reset the last cardmatch
   move();
   showCards(16);
 };
@@ -76,18 +77,6 @@ function move(){
 
 
 // checkMatching();
-let  cards = document.querySelectorAll('.deck li');
-
-function flipCard() {
-  for (let i = 0; i < cards.length; i++) {
-    cards[i].addEventListener('click', function() {
-      let clicked = $(this).children('i').attr("class").split(' ');
-      this.classList.add('open', 'show', 'animated', 'bounceIn');
-      tempArray.push(clicked);
-      cardMatch();
-    });
-  }
-}
 
 // MAtching the Cards
 function cardMatch() {
@@ -107,9 +96,13 @@ function cardMatch() {
 }
 
 function play(){
-  $(".deck").on("click","li",function() {
+  $(".deck").on("click","li",function() {//All Live Click actions
     moveCont += 1;
-    move();    
+    move();   
+    let clicked = $(this).children('i').attr("class").split(' ');
+      this.classList.add('open', 'show', 'animated', 'bounceIn');
+      tempArray.push(clicked);
+      cardMatch(); 
   });
 
   $( ".restart" ).click(function() {
@@ -117,8 +110,6 @@ function play(){
   });
 
 }
-flipCard();
-
 play();
 
 /*
