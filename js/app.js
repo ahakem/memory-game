@@ -12,7 +12,7 @@
 let moveCont = 0;
 let matchCont = 0;
 const moveContWraper = $(".moves");
-var  tempArray = [];
+let  tempArray = [];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 
