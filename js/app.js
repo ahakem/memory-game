@@ -12,7 +12,9 @@
 let moveCont = 0;
 let matchCont = 0;
 const moveContWraper = $(".moves");
-var  tempArray = [];
+let  tempArray = [];
+let  tempArray2 = [];
+let cardIndex;
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 
@@ -54,8 +56,8 @@ function showCards(index) {
   let dublicatedCards = cardIcons.concat(cardIcons);
   let shuffledCards = shuffle(dublicatedCards);
 
-  for (let cards = 0; cards < index ; cards ++) {
-    let card = '<li class="card"> <i class="fa '+ shuffledCards[cards]+'"></i> </li>';
+  for (let i = 0; i < index ; i ++) {
+    let card = '<li class="card" index="'+i+'" data-icon="'+ shuffledCards[i]+'"> <i class="fa '+ shuffledCards[i]+'"></i> </li>';
     $(".deck").append(card); 
   }
 };
@@ -79,38 +81,50 @@ function move(){
 // checkMatching();
 
 // MAtching the Cards
-function cardMatch() {
-  if (tempArray.length == 2) {
-    if (arraysIdentical(tempArray[0], tempArray[1]) != true) {
+function matchCard() {
+  if (tempArray.length == 2 ) {
+    if (arraysIdentical(tempArray[0], tempArray[1]) != true)  {
       setTimeout(function () {      
-         $( ".card.open.show" ).removeClass( "open show bounceIn" );         
+         $( ".card.open.show" ).removeClass( "open show" );         
       }, 800);
       
       tempArray = [];
+      tempArray2 = [];
     }else{
-      matchCont += 1;
-      $(".card.open.show" ).addClass( "match flip" );
-      tempArray = [];
+      if (tempArray2[0] !== tempArray2[1]) {
+        matchCont += 1;
+        $(".card.open.show" ).addClass( "match" );
+        tempArray = [];
+        tempArray2 = [];
+      }
+      else{
+        alert("don't duble click");
+        $( ".card.open.show" ).removeClass( "open show" ); 
+        tempArray = [];
+        tempArray2 = [];
+      }
     }
   }
+
 }
 
 function play(){
   $(".deck").on("click","li",function() {//All Live Click actions
     moveCont += 1;
     move();   
-    let clicked = $(this).children('i').attr("class").split(' ');
-      this.classList.add('open', 'show', 'animated', 'bounceIn');
-      tempArray.push(clicked);
-      cardMatch(); 
+    let clicked = $(this).attr("data-icon");
+    cardIndex = $(this).attr("index");
+    this.classList.add('open', 'show', 'animated', 'bounceIn');
+    tempArray.push(clicked);
+    tempArray2.push(cardIndex);
+    matchCard(); 
   });
 
-  $( ".restart" ).click(function() {
-    restart();
-  });
+  $(".restart" ).click(restart);
 
 }
-play();
+$(".js-start" ).click(play);
+// play();
 
 /*
  * set up the event listener for a card. If a card is clicked:
