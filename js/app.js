@@ -57,7 +57,7 @@ function showCards(index) {
   let shuffledCards = shuffle(dublicatedCards);
 
   for (let i = 0; i < index ; i ++) {
-    let card = '<li class="card" index="'+i+'" data-icon="'+ shuffledCards[i]+'"> <i class="fa '+ shuffledCards[i]+'"></i> </li>';
+    let card = '<li class="card" index="'+i+'" > <i class="fa '+ shuffledCards[i]+'" data-icon="'+ shuffledCards[i]+'"></i> </li>';
     $(".deck").append(card); 
   }
 };
@@ -112,7 +112,8 @@ function play(){
   $(".deck").on("click","li",function() {//All Live Click actions
     moveCont += 1;
     move();   
-    let clicked = $(this).attr("data-icon");
+    // let clicked = $(this).attr("data-icon");
+    let clicked = $(this).children('i').attr("data-icon");
     cardIndex = $(this).attr("index");
     this.classList.add('open', 'show', 'animated', 'bounceIn');
     tempArray.push(clicked);
