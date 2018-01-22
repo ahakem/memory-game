@@ -26,6 +26,7 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: relative;
 }
 
 h1 {
@@ -106,4 +107,43 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+}
+.deck-wraper{
+    position: relative;
+}
+.fa-check{
+    font-size: 40px;
+    color: green;
+}
+.btn{
+    border-radius: 5px;
+    padding: 8px 24px;
+    font-size: 16px;
+    background-color: #fe7b10;
+    color: #fff;
+    text-decoration: none;
+}
+.btn:hover{
+    background-color: #e56701;
+    box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.36);
+}
+.result,.start{
+    position: absolute;
+    top:20%;
+    width:400px;
+    z-index: 99;
+    text-align: center;
+    background: #fff;
+    right: -200px;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    display: none;
+}
+.start{
+    display: block;
+    top: 30%;
+    left: 50%;
+    margin-left: -150px;
 }

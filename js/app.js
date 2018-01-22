@@ -78,14 +78,13 @@ function move(){
 }
 
 
-// checkMatching();
 
 // MAtching the Cards
 function matchCard() {
   if (tempArray.length == 2 ) {
     if (arraysIdentical(tempArray[0], tempArray[1]) != true)  {
       setTimeout(function () {      
-         $( ".card.open.show" ).removeClass( "open show" );         
+         $( ".card.open.show" ).removeClass( "open show bounceIn" );         
       }, 800);
       
       tempArray = [];
@@ -93,7 +92,7 @@ function matchCard() {
     }else{
       if (tempArray2[0] !== tempArray2[1]) {
         matchCont += 1;
-        $(".card.open.show" ).addClass( "match" );
+        $(".card.open.show" ).addClass( "match flip" );
         tempArray = [];
         tempArray2 = [];
       }
@@ -105,6 +104,7 @@ function matchCard() {
       }
     }
   }
+  finish();
 
 }
 
@@ -119,12 +119,39 @@ function play(){
     tempArray2.push(cardIndex);
     matchCard(); 
   });
+  $( ".restart" ).click(function() {
+    restart();
+    $(".result").hide();
+  });
 
-  $(".restart" ).click(restart);
 
 }
-$(".js-start" ).click(play);
-// play();
+
+// when game finish
+function finish(){
+  let stars;
+  if (matchCont == 8) {
+    if (moveCont <= 8) {
+      stars = 3;
+      console.log (stars);
+    } else if(moveCont > 8 && moveCont < 16) {
+      stars = 2;
+      console.log (stars);
+    }else{
+      stars = 1;
+      console.log (stars);
+    }
+    $(".moves").text(moveCont);
+    $(".star").text(stars);
+    $(".result").addClass('wobble').show();
+  }
+  
+}
+// Start the game
+$( ".js-start" ).click(function() {
+  $(this).closest(".start").addClass('flipOutX');
+    play();
+});
 
 /*
  * set up the event listener for a card. If a card is clicked:
