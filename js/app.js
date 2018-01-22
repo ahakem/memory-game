@@ -132,10 +132,10 @@ function play(){
 function finish(){
   let stars;
   if (matchCont == 8) {
-    if (moveCont <= 8) {
+    if (moveCont <= 16) {
       stars = 3;
       console.log (stars);
-    } else if(moveCont > 8 && moveCont < 16) {
+    } else if(moveCont > 16 && moveCont < 32) {
       stars = 2;
       console.log (stars);
     }else{
