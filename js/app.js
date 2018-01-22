@@ -67,6 +67,7 @@ showCards(16);
 function restart() {
   $(".deck li").remove(); 
   moveCont = 0;
+  matchCont = 0;
   tempArray = []; //For reset the last cardmatch
   move();
   showCards(16);
