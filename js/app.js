@@ -10,6 +10,7 @@
  *   - add each card's HTML to the page
  */
 let moveCont = 0;
+let traialCont = 0;
 let matchCont = 0;
 const moveContWraper = $(".moves");
 let  tempArray = [];
@@ -67,6 +68,7 @@ showCards(16);
 function restart() {
   $(".deck li").remove(); 
   moveCont = 0;
+  traialCont = 0;
   matchCont = 0;
   tempArray = []; //For reset the last cardmatch
   move();
@@ -74,7 +76,7 @@ function restart() {
 };
 
 function move(){
-  moveContWraper.text(moveCont);
+  moveContWraper.text(traialCont);
 
 }
 
@@ -112,6 +114,9 @@ function matchCard() {
 function play(){
   $(".deck").on("click","li",function() {//All Live Click actions
     moveCont += 1;
+    if (moveCont % 2 == 0) {
+      traialCont += 1;
+    }
     move();   
     // let clicked = $(this).attr("data-icon");
     let clicked = $(this).children('i').attr("data-icon");
@@ -133,17 +138,17 @@ function play(){
 function finish(){
   let stars;
   if (matchCont == 8) {
-    if (moveCont <= 16) {
+    if (traialCont <= 16) {
       stars = 3;
       console.log (stars);
-    } else if(moveCont > 16 && moveCont < 32) {
+    } else if(traialCont > 16 && traialCont < 32) {
       stars = 2;
       console.log (stars);
     }else{
       stars = 1;
       console.log (stars);
     }
-    $(".moves").text(moveCont);
+    $(".moves").text(traialCont);
     $(".star").text(stars);
     $(".result").addClass('wobble').show();
   }
