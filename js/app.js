@@ -153,7 +153,7 @@ function play(){
 }
 
 
-// timer
+// timer https://jsfiddle.net/Daniel_Hug/pvk6p/
 
 function time() {
     seconds++;
@@ -165,6 +165,7 @@ function time() {
     timerWraper.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
     timer();
 }
+
 function timer() {
     t = setTimeout(time, 1000);
 }
