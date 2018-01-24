@@ -111,17 +111,18 @@ function matchCard() {
         tempArray2 = [];
       }
       else{
-        alert("don't duble click");
+        // alert("don't duble click");
         $( ".card.open.show" ).removeClass( "open show" ); 
         tempArray = [];
         tempArray2 = [];
+        // $(this).off();
       }
     }
   }
 
-  if (moveCont == 10) {
+  if (moveCont == 18) {
       $(".stars li:last-child").remove();
-    } else if (moveCont == 18) {
+    } else if (moveCont == 36) {
       $(".stars li:last-child").remove();
     }
   finish();
@@ -149,8 +150,6 @@ function play(){
   });
   timer();
   liveStars(3);
-
-
 }
 
 
@@ -184,6 +183,7 @@ function finish(){
     clearTimeout(t);
     $(".moves").text(traialCont);
     $(".star").text(stars);
+    $(".timer").text(timerWraper.textContent); 
     $(".result").addClass('wobble').show();
   }
   
