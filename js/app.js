@@ -76,6 +76,7 @@ function restart() {
   tempArray = []; //For reset the last cardmatch
 
   move();
+  liveStars(3);
   showCards(16);
 };
 
@@ -84,7 +85,13 @@ function move(){
 
 }
 
-
+function liveStars(index) {
+  $(".stars li").remove();
+  for (let i = 0; i <= index-1 ; i ++) {
+    let starsContent = '<li><i class="fa fa-star"></i></li>';
+    $(".stars").append(starsContent); 
+  }
+}
 
 // MAtching the Cards
 function matchCard() {
@@ -111,6 +118,12 @@ function matchCard() {
       }
     }
   }
+
+  if (moveCont == 10) {
+      $(".stars li:last-child").remove();
+    } else if (moveCont == 18) {
+      $(".stars li:last-child").remove();
+    }
   finish();
 
 }
@@ -135,6 +148,7 @@ function play(){
     $(".result").hide();
   });
   timer();
+  liveStars(3);
 
 
 }
@@ -147,11 +161,9 @@ function time() {
     if (seconds >= 60) {
         seconds = 0;
         minutes++;
-       
     }
     
     timerWraper.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
-
     timer();
 }
 function timer() {
@@ -162,15 +174,12 @@ function timer() {
 function finish(){
   let stars;
   if (matchCont == 8) {
-    if (traialCont <= 16) {
+    if (traialCont <= 8) {
       stars = 3;
-      console.log (stars);
-    } else if(traialCont > 16 && traialCont < 32) {
+    } else if(traialCont > 8 && traialCont < 16) {
       stars = 2;
-      console.log (stars);
     }else{
       stars = 1;
-      console.log (stars);
     }
     clearTimeout(t);
     $(".moves").text(traialCont);
