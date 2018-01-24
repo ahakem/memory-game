@@ -16,7 +16,8 @@ const moveContWraper = $(".moves");
 let  tempArray = [];
 let  tempArray2 = [];
 let cardIndex;
-
+var timerWraper = document.getElementsByTagName('time')[0],
+    seconds = 0, minutes = 0, hours = 0, t;
 // Shuffle function from http://stackoverflow.com/a/2450976
 
 function shuffle(array) {
@@ -70,7 +71,10 @@ function restart() {
   moveCont = 0;
   traialCont = 0;
   matchCont = 0;
+  timerWraper.textContent = "00:00";
+  seconds = 0; minutes = 0;
   tempArray = []; //For reset the last cardmatch
+
   move();
   showCards(16);
 };
@@ -130,8 +134,28 @@ function play(){
     restart();
     $(".result").hide();
   });
+  timer();
 
 
+}
+
+
+// timer
+
+function time() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+       
+    }
+    
+    timerWraper.textContent = (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+    timer();
+}
+function timer() {
+    t = setTimeout(time, 1000);
 }
 
 // when game finish
@@ -148,6 +172,7 @@ function finish(){
       stars = 1;
       console.log (stars);
     }
+    clearTimeout(t);
     $(".moves").text(traialCont);
     $(".star").text(stars);
     $(".result").addClass('wobble').show();
@@ -158,6 +183,7 @@ function finish(){
 $( ".js-start" ).click(function() {
   $(this).closest(".start").addClass('flipOutX');
     play();
+    
 });
 
 /*
