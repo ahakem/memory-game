@@ -111,11 +111,9 @@ function matchCard() {
         tempArray2 = [];
       }
       else{
-        // alert("don't duble click");
-        $( ".card.open.show" ).removeClass( "open show" ); 
-        tempArray = [];
-        tempArray2 = [];
-        // $(this).off();
+        tempArray.pop();
+        tempArray2.pop();
+        moveCont -= 1;
       }
     }
   }
