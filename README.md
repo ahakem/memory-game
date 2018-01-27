@@ -2,7 +2,8 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
+* [Instructions](#instructions) 
+* [Dependencies](#dependencies)
 
 ## Instructions
 
@@ -15,3 +16,8 @@
 [Demo here](https://gfxway.github.io/memory-game/).
 
 
+## Dependencies
+
+- finish the game in 8 click you got 3 star
+- finish the game more then 8 click and less than 16 click you got 2 star
+- finish the game in more than 16 click you got a star.
