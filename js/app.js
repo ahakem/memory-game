@@ -103,17 +103,20 @@ function matchCard() {
       
       tempArray = [];
       tempArray2 = [];
+      move();
     }else{
       if (tempArray2[0] !== tempArray2[1]) {
         matchCont += 1;
         $(".card.open.show" ).addClass( "match flip" );
         tempArray = [];
         tempArray2 = [];
+        move();
       }
       else{
         tempArray.pop();
         tempArray2.pop();
         moveCont -= 1;
+        traialCont -= 1;
       }
     }
   }
@@ -133,7 +136,7 @@ function play(){
     if (moveCont % 2 == 0) {
       traialCont += 1;
     }
-    move();   
+       
     // let clicked = $(this).attr("data-icon");
     let clicked = $(this).children('i').attr("data-icon");
     cardIndex = $(this).attr("index");
