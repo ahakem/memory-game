@@ -13,7 +13,7 @@
 - 16 clickes you got 3 stars, More than 16 click and less then 32 you got 2 stars else you got one Star 
 
 
-[Demo here](https://gfxway.github.io/memory-game/).
+[Demo here](https://ahakem.github.io/memory-game/).
 
 
 ## Dependencies
